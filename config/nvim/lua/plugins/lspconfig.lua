@@ -286,7 +286,21 @@ lspconfig.vimls.setup(
     end
   )
 )
-
+lspconfig.terraformls.setup{}
+lspconfig.gopls.setup {
+    cmd = {"gopls", "serve"},
+    filetypes = {"go", "gomod"},
+    root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"),
+    settings = {
+      gopls = {
+        analyses = {
+          unusedparams = true,
+        },
+        staticcheck = true,
+      },
+    },
+  }
+lspconfig.yamlls.setup {}
 lspconfig.diagnosticls.setup(
   make_config(
     function(config)
