@@ -174,10 +174,12 @@
     extendRegexp = true
     lineNumber = true
 [credential]
-	helper = store
+	helper = osxkeychain
 [rebase]
     instructionFormat = "[%an - %ar] %s"
     autoStash = true
 [user]
-	name = rochana
-	email = jenkins-x@googlegroups.com
+	name = Rochana Atapattu
+	email = rochana.atapattu2@gmail.com
+[github]
+	user = rochana-atapattu

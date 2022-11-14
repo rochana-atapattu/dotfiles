@@ -70,7 +70,7 @@ setup_symlinks() {
         target="$HOME/.$(basename "$file" '.symlink')"
         if [ -e "$target" ]; then
             info "~${target#$HOME} already exists... Skipping."
-        else
+	else
             info "Creating symlink for $file"
             ln -s "$file" "$target"
         fi
@@ -88,7 +88,7 @@ setup_symlinks() {
         target="$HOME/.config/$(basename "$config")"
         if [ -e "$target" ]; then
             info "~${target#$HOME} already exists... Skipping."
-        else
+	else
             info "Creating symlink for $config"
             ln -s "$config" "$target"
         fi
