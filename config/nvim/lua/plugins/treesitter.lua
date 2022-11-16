@@ -36,6 +36,7 @@ treesitter.setup({
     "gomod",
     "python",
     "dockerfile",
+    "make",
   },
   -- auto install above language parsers
   auto_install = true,

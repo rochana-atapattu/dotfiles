@@ -50,3 +50,6 @@ brew "wdiff" # word differences in text files
 brew "wget" # internet file retriever
 brew "z" # switch between most used directories
 brew "zsh" # zsh (latest)
+brew "zk"
+# TFENV_ARCH=amd64 tfenv install 1.3.3 
+brew "tfenv"

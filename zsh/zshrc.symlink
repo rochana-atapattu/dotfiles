@@ -82,8 +82,8 @@ fi
 bindkey "^A" vi-beginning-of-line
 bindkey -M viins "^F" vi-forward-word               # [Ctrl-f] - move to next word
 bindkey -M viins "^E" vi-add-eol                    # [Ctrl-e] - move to end of line
-bindkey "^J" history-beginning-search-forward
-bindkey "^K" history-beginning-search-backward
+bindkey "^N" history-beginning-search-forward
+bindkey "^P" history-beginning-search-backward
 
 # matches case insensitive for lowercase
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
@@ -110,6 +110,7 @@ zfetch zsh-users/zsh-autosuggestions
 zfetch grigorii-zander/zsh-npm-scripts-autocomplete
 # zfetch chriskempson/base16-shell
 zfetch Aloxaf/fzf-tab
+zfetch zsh-users/zsh-history-substring-search
 
 if [[ -x "$(command -v fnm)" ]]; then
     eval "$(fnm env --use-on-cd)"
