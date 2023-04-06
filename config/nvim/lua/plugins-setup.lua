@@ -101,9 +101,13 @@ return packer.startup(function(use)
   use("lewis6991/gitsigns.nvim") -- show line modifications on left hand side
 
   -- note taking
-  use("mickael-menu/zk-nvim")
+  -- use("mickael-menu/zk-nvim")
+
+  use("github/copilot.vim")
 
   if packer_bootstrap then
     require("packer").sync()
   end
 end)
+
+

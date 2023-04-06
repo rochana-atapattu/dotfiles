@@ -22,6 +22,7 @@ end
 
 tap "homebrew/bundle"
 tap "homebrew/core"
+tap "sdkman/tap"
 
 # packages
 brew "bat" # better cat
@@ -54,3 +55,7 @@ brew "zk"
 # TFENV_ARCH=amd64 tfenv install 1.3.3 
 brew "tfenv"
 brew "bazelisk"
+
+brew "golangci-lint"
+brew "terraform-docs"
+brew "sdkman-cli"
