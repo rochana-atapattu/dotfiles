@@ -248,20 +248,6 @@ export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
 export SDKMAN_DIR=$(brew --prefix sdkman-cli)/libexec
 [[ -s "${SDKMAN_DIR}/bin/sdkman-init.sh" ]] && source "${SDKMAN_DIR}/bin/sdkman-init.sh"
-GIT_AUTHOR_NAME=rochanaatapattu
-PULL_BASE_REF=main
-PULL_BASE_SHA=7880053f238f4e83ec5908eb2438076a61002ff0
-PULL_NUMBER=4042
-PULL_PULL_REF=refs/pull/4042/head
-PULL_PULL_SHA=c0ff1d2418e07d517d99dd1469236b4e338a5f58
-PULL_REFS=main:7880053f238f4e83ec5908eb2438076a61002ff0,4042:c0ff1d2418e07d517d99dd1469236b4e338a5f58:refs/pull/4042/head
-JOB_NAME=verify
-JOB_SPEC=type:presubmit
-JOB_TYPE=presubmit
-REPO_NAME=development-cluster
-REPO_OWNER=prodoscore
-REPO_URL=https://github.com/prodoscore/development-cluster.git
-JX_KUBERNETES=true
 
 source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
 source /opt/homebrew/opt/chruby/share/chruby/auto.sh
