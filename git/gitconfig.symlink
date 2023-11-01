@@ -105,6 +105,7 @@
     rg = "!sh -c 'git ls-files --others --exclude-standard | grep $1 | xargs rm' -"
 
     remotes = remote -v
+	checkout-all = "!f() { if [ \"$1\" = \"-B\" ]; then git checkout -B ${2} && git submodule foreach --recursive git checkout -B ${2}; else git checkout $1 && git submodule foreach --recursive git checkout $1; fi }; f"
 [color]
     diff = auto
     status = auto
@@ -138,6 +139,7 @@
     renames = copies
     mnemonicprefix = true
     compactionHeuristic = true
+	submodule = log
 [difftool]
     prompt = false
 [apply]
@@ -174,12 +176,14 @@
     extendRegexp = true
     lineNumber = true
 [credential]
-	helper = osxkeychain
+	helper = store
 [rebase]
     instructionFormat = "[%an - %ar] %s"
     autoStash = true
 [user]
 	name = Rochana Atapattu
-	email = rochana.atapattu2@gmail.com
+	email = 31321610+rochana-atapattu@users.noreply.github.com
 [github]
 	user = rochana-atapattu
+[submodule]
+	recurse = true

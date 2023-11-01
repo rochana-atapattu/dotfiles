@@ -23,6 +23,7 @@ end
 tap "homebrew/bundle"
 tap "homebrew/core"
 tap "sdkman/tap"
+tap "snyk/tap"
 
 # packages
 brew "bat" # better cat
@@ -59,3 +60,14 @@ brew "bazelisk"
 brew "golangci-lint"
 brew "terraform-docs"
 brew "sdkman-cli"
+
+brew "snyk"
+brew "ngrok"
+
+
+brew "chruby" 
+brew "ruby-install"
+brew "xz"
+brew "kind"
+brew "krew"
+brew "kubebuilder"
