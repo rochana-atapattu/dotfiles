@@ -15,6 +15,17 @@ bind-key C-a send-prefix
 bind-key q kill-window
 bind-key x kill-pane
 
+
+# and now unbind keys
+unbind Up     
+unbind Down   
+unbind Left   
+unbind Right  
+
+unbind C-Up   
+unbind C-Down 
+unbind C-Left 
+unbind C-Right
 # for nested tmux sessions
 bind-key a send-prefix
 
@@ -68,7 +79,7 @@ bind -r l resize-pane -R 5
 bind -r h resize-pane -L 5
 
 bind -r m resize-pane -Z
-bind -r Tab last-window
+bind -r t last-window
 # enable mouse support for switching panes/windows    
 set -g mouse on
 
