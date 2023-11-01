@@ -22,6 +22,8 @@ end
 
 tap "homebrew/bundle"
 tap "homebrew/core"
+tap "sdkman/tap"
+tap "snyk/tap"
 
 # packages
 brew "bat" # better cat
@@ -50,3 +52,22 @@ brew "wdiff" # word differences in text files
 brew "wget" # internet file retriever
 brew "z" # switch between most used directories
 brew "zsh" # zsh (latest)
+brew "zk"
+# TFENV_ARCH=amd64 tfenv install 1.3.3 
+brew "tfenv"
+brew "bazelisk"
+
+brew "golangci-lint"
+brew "terraform-docs"
+brew "sdkman-cli"
+
+brew "snyk"
+brew "ngrok"
+
+
+brew "chruby" 
+brew "ruby-install"
+brew "xz"
+brew "kind"
+brew "krew"
+brew "kubebuilder"

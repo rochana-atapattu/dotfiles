@@ -1,3 +1,7 @@
+emulate sh
+source ~/.profile
+emulate zsh
+
 # .zprofile is sourced on login shells and before .zshrc. As a general rule, it should not change the
 # shell environment at all.
 
@@ -12,3 +16,5 @@ elif [[ -d /home/linuxbrew/.linuxbrew ]]; then
     test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
     test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
+# Set PATH, MANPATH, etc., for Homebrew.
+eval "$(/opt/homebrew/bin/brew shellenv)"
