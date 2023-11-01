@@ -12,6 +12,8 @@ set -g prefix C-a
 unbind C-b
 bind-key C-a send-prefix
 
+bind-key q kill-window
+bind-key x kill-pane
 
 # for nested tmux sessions
 bind-key a send-prefix
