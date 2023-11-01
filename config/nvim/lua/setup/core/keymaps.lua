@@ -9,6 +9,17 @@ local keymap = vim.keymap -- for conciseness
 -- use jk to exit insert mode
 keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode with jk" })
 
+keymap.set("n", "<Left>", ":echoerr 'Use h'<CR>", { desc = "Discourage use of Left arrow" })
+keymap.set("n", "<Right>", ":echoerr 'Use l'<CR>", { desc = "Discourage use of Right arrow" })
+keymap.set("n", "<Up>", ":echoerr 'Use k'<CR>", { desc = "Discourage use of Up arrow" })
+keymap.set("n", "<Down>", ":echoerr 'Use j'<CR>", { desc = "Discourage use of Down arrow" })
+
+-- Discourage the use of arrow keys in insert mode
+keymap.set("i", "<Left>", "<ESC>:echoerr 'Use h'<CR>", { desc = "Discourage use of Left arrow" })
+keymap.set("i", "<Right>", "<ESC>:echoerr 'Use l'<CR>", { desc = "Discourage use of Right arrow" })
+keymap.set("i", "<Up>", "<ESC>:echoerr 'Use k'<CR>", { desc = "Discourage use of Up arrow" })
+keymap.set("i", "<Down>", "<ESC>:echoerr 'Use j'<CR>", { desc = "Discourage use of Down arrow" })
+
 -- clear search highlights
 keymap.set("n", "<leader>nh", ":nohl<CR>", { desc = "Clear search highlights" })
 
