@@ -3,6 +3,60 @@ vim.g.mapleader = " "
 
 local keymap = vim.keymap -- for conciseness
 
+
+
+
+-- Table to store pane IDs for each direction
+local pane_ids = {
+    h = '', -- left
+    j = '', -- down
+    k = '', -- up
+    l = ''  -- right
+}
+
+-- Function to check if a pane exists
+local function pane_exists(pane_id)
+    if pane_id == '' then return false end
+    local exists = vim.fn.system('tmux list-panes -t ' .. pane_id)
+    return vim.v.shell_error == 0
+end
+
+-- Function to remove a pane ID if it does not exist
+local function remove_invalid_pane_id(direction)
+    if not pane_exists(pane_ids[direction]) then
+        pane_ids[direction] = ''
+    end
+end
+
+-- Main function to open or reuse a tmux pane
+function OpenTmuxPaneToDir(direction)
+    local current_line = vim.fn.getline('.')
+    local path = string.match(current_line, '.* (%S+)$')
+    local full_path = vim.fn.fnamemodify(path, ':p')
+    local tmux_command = vim.fn.isdirectory(full_path) == 1 and 'cd ' .. vim.fn.shellescape(full_path) or 'cd ' .. vim.fn.shellescape(vim.fn.fnamemodify(full_path, ':h'))
+
+    remove_invalid_pane_id(direction)
+
+    -- If the pane does not exist or has been closed, create a new one
+    if pane_ids[direction] == '' then
+        local split_command = direction == 'h' and '-h' or (direction == 'j' and '-v' or (direction == 'k' and '-v -b' or '-h -b'))
+        pane_ids[direction] = vim.fn.trim(vim.fn.system('tmux split-window ' .. split_command .. 'P'))
+        -- Send the command to the new pane
+        if pane_ids[direction] ~= '' then
+            vim.fn.system('tmux send-keys -t ' .. pane_ids[direction] .. ' "' .. tmux_command .. '" C-m')
+        end
+    else
+        -- Pane exists, send the command to the pane
+        vim.fn.system('tmux send-keys -t ' .. pane_ids[direction] .. ' "' .. tmux_command .. '" C-m')
+    end
+end
+
+-- Key mappings
+keymap.set('n', '<leader>th', function() OpenTmuxPaneToDir('h') end, { noremap = true, silent = true })
+keymap.set('n', '<leader>tj', function() OpenTmuxPaneToDir('j') end, { noremap = true, silent = true })
+keymap.set('n', '<leader>tk', function() OpenTmuxPaneToDir('k') end, { noremap = true, silent = true })
+keymap.set('n', '<leader>tl', function() OpenTmuxPaneToDir('l') end, { noremap = true, silent = true })
+
 ---------------------
 -- General Keymaps -------------------
 

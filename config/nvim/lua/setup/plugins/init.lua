@@ -5,5 +5,9 @@ return {
 
   "inkarkat/vim-ReplaceWithRegister", -- replace with register contents using motion (gr + motion)
   
-   "sindrets/diffview.nvim"
+   "folke/twilight.nvim",
+
+   "sindrets/diffview.nvim",
+  
+  "github/copilot.vim"
 }
