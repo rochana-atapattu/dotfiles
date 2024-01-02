@@ -9,5 +9,7 @@ return {
 
    "sindrets/diffview.nvim",
   
-  "github/copilot.vim"
+  "github/copilot.vim",
+
+  "mustache/vim-mustache-handlebars"
 }
