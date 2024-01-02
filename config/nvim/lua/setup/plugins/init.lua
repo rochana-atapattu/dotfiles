@@ -4,4 +4,12 @@ return {
   "christoomey/vim-tmux-navigator", -- tmux & split window navigation
 
   "inkarkat/vim-ReplaceWithRegister", -- replace with register contents using motion (gr + motion)
+  
+   "folke/twilight.nvim",
+
+   "sindrets/diffview.nvim",
+  
+  "github/copilot.vim",
+
+  "mustache/vim-mustache-handlebars"
 }
