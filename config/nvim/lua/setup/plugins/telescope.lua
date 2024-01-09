@@ -1,52 +1,3 @@
-function printTable(t, f)
-
-   local function printTableHelper(obj, cnt)
-
-      local cnt = cnt or 0
-
-      if type(obj) == "table" then
-
-         io.write("\n", string.rep("\t", cnt), "{\n")
-         cnt = cnt + 1
-
-         for k,v in pairs(obj) do
-
-            if type(k) == "string" then
-               io.write(string.rep("\t",cnt), '["'..k..'"]', ' = ')
-            end
-
-            if type(k) == "number" then
-               io.write(string.rep("\t",cnt), "["..k.."]", " = ")
-            end
-
-            printTableHelper(v, cnt)
-            io.write(",\n")
-         end
-
-         cnt = cnt-1
-         io.write(string.rep("\t", cnt), "}")
-
-      elseif type(obj) == "string" then
-         io.write(string.format("%q", obj))
-
-      elseif type(obj) == "function" then
-        -- Handle function type
-        io.write("function: ", tostring(obj))
-
-      else
-         io.write(tostring(obj))
-      end 
-   end
-
-   if f == nil then
-      printTableHelper(t)
-   else
-      io.output(f)
-      io.write("return")
-      printTableHelper(t)
-      io.output(io.stdout)
-   end
-end
 return {
   "nvim-telescope/telescope.nvim",
   branch = "0.1.x",
@@ -107,7 +58,6 @@ return {
     end, { desc = '[/] Fuzzily search in current buffer]' })
 
     keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
-    -- keymap.set('n', '<leader>sfh', builtin.find_files, {hidden = true}, { desc = '[S]earch [F]iles including hidden files' })
     keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
     keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
     keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
@@ -118,9 +68,5 @@ return {
     keymap.set("n", "<Leader>sr", git_worktree.git_worktrees, {silent = true})
     keymap.set("n", "<Leader>sR", git_worktree.create_git_worktree, {silent = true})
     keymap.set("n", "<Leader>sn", notify.notify, {silent = true})
-    keymap.set("n", "<Leader>sx", function ()
-      local mappings = vim.api.nvim_get_keymap('n')  -- Get normal mode mappings
-        printTable(mappings,"test.txt")
-    end, {silent = true})
   end,
 }
