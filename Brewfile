@@ -71,3 +71,8 @@ brew "xz"
 brew "kind"
 brew "krew"
 brew "kubebuilder"
+brew "koekeishiya/formulae/yabai"
+brew "koekeishiya/formulae/skhd"
+brew "jesseduffield/lazygit/lazygit"
+
+brew "stylua"

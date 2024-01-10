@@ -1,2 +1,2 @@
-require("setup.core")
-require("setup.lazy")
+require "setup.core"
+require "setup.lazy"

@@ -1,63 +1,88 @@
 return {
-  {
-    "nvim-treesitter/nvim-treesitter",
-    event = { "BufReadPre", "BufNewFile" },
-    build = ":TSUpdate",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter-textobjects",
-      "windwp/nvim-ts-autotag",
-    },
-    config = function()
-      -- import nvim-treesitter plugin
-      local treesitter = require("nvim-treesitter.configs")
+  "nvim-treesitter/nvim-treesitter",
+  config = function()
+    require("nvim-treesitter.configs").setup {
+      -- Add languages to be installed here that you want installed for treesitter
+      ensure_installed = {
+        "go",
+        "lua",
+        "python",
+        "rust",
+        "typescript",
+        "regex",
+        "bash",
+        "markdown",
+        "markdown_inline",
+        "sql",
+        "terraform"
+      },
 
-      -- configure treesitter
-      treesitter.setup({ -- enable syntax highlighting
-        highlight = {
-          enable = true,
+      highlight = { enable = true },
+      indent = { enable = true },
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection = "<c-space>",
+          node_incremental = "<c-space>",
+          scope_incremental = "<c-s>",
+          node_decremental = "<c-backspace>",
         },
-        -- enable indentation
-        indent = { enable = true },
-        -- enable autotagging (w/ nvim-ts-autotag plugin)
-        autotag = {
+      },
+      textobjects = {
+        select = {
           enable = true,
-        },
-        -- ensure these language parsers are installed
-        ensure_installed = {
-          "json",
-          "javascript",
-          "typescript",
-          "tsx",
-          "yaml",
-          "html",
-          "css",
-          "prisma",
-          "markdown",
-          "markdown_inline",
-          "svelte",
-          "graphql",
-          "bash",
-          "lua",
-          "vim",
-          "dockerfile",
-          "gitignore",
-          "query",
-        },
-        incremental_selection = {
-          enable = true,
+          lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
           keymaps = {
-            init_selection = "<C-space>",
-            node_incremental = "<C-space>",
-            scope_incremental = false,
-            node_decremental = "<bs>",
+            -- You can use the capture groups defined in textobjects.scm
+            ["aa"] = "@parameter.outer",
+            ["ia"] = "@parameter.inner",
+            ["af"] = "@function.outer",
+            ["if"] = "@function.inner",
+            ["ac"] = "@class.outer",
+            ["ic"] = "@class.inner",
+            ["ii"] = "@conditional.inner",
+            ["ai"] = "@conditional.outer",
+            ["il"] = "@loop.inner",
+            ["al"] = "@loop.outer",
+            ["at"] = "@comment.outer",
           },
         },
-        -- enable nvim-ts-context-commentstring plugin for commenting tsx and jsx
-        context_commentstring = {
+        move = {
           enable = true,
-          enable_autocmd = false,
+          set_jumps = true, -- whether to set jumps in the jumplist
+          goto_next_start = {
+            ["]m"] = "@function.outer",
+            ["]]"] = "@class.outer",
+          },
+          goto_next_end = {
+            ["]M"] = "@function.outer",
+            ["]["] = "@class.outer",
+          },
+          goto_previous_start = {
+            ["[m"] = "@function.outer",
+            ["[["] = "@class.outer",
+          },
+          goto_previous_end = {
+            ["[M"] = "@function.outer",
+            ["[]"] = "@class.outer",
+          },
+          -- goto_next = {
+          --   [']i'] = "@conditional.inner",
+          -- },
+          -- goto_previous = {
+          --   ['[i'] = "@conditional.inner",
+          -- }
         },
-      })
-    end,
-  },
+        swap = {
+          enable = true,
+          swap_next = {
+            ["<leader>a"] = "@parameter.inner",
+          },
+          swap_previous = {
+            ["<leader>A"] = "@parameter.inner",
+          },
+        },
+      },
+    }
+  end,
 }
