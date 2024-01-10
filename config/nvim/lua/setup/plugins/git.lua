@@ -79,8 +79,11 @@ return {
     "tpope/vim-fugitive",
     lazy = false,
     keys = {
+      { "<leader>G", "<cmd>Git<cr>", desc = "git" },
       { "<leader>gr", "<cmd>Gread<cr>", desc = "read file from git" },
       { "<leader>gb", "<cmd>G blame<cr>", desc = "read file from git" },
+      { "<leader>gc", "<cmd>Git commit <CR>", desc = "commit in git", noremap = false },
+      { "<leader>gp", "<cmd>Git push -u origin HEAD<CR>", desc = "push to git", noremap = false },
     },
     dependencies = { "tpope/vim-rhubarb" },
   },
