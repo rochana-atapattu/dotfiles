@@ -13,9 +13,8 @@ return {
         "bash",
         "markdown",
         "markdown_inline",
-        "kdl",
         "sql",
-        "org",
+        "terraform"
       },
 
       highlight = { enable = true },
