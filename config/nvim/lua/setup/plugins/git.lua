@@ -1,6 +1,14 @@
 return {
   {
     "lewis6991/gitsigns.nvim",
+    "github/copilot.vim",
+
+    {
+      "ThePrimeagen/git-worktree.nvim",
+      config = function()
+        require("git-worktree").setup()
+      end,
+    },
     dependencies = { "tpope/vim-fugitive" },
     config = function()
       require("gitsigns").setup {

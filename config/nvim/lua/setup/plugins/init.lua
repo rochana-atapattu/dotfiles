@@ -9,14 +9,7 @@ return {
 
   "sindrets/diffview.nvim",
 
-  "github/copilot.vim",
-
-  {
-    "ThePrimeagen/git-worktree.nvim",
-    config = function()
-      require("git-worktree").setup()
-    end,
-  },
+  
   "tpope/vim-surround",
 
   "mustache/vim-mustache-handlebars",
