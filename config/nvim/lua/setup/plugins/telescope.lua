@@ -32,7 +32,8 @@ return {
             ['<C-d>'] = false,
             ["<C-k>"] = actions.move_selection_previous, -- move to prev result
             ["<C-j>"] = actions.move_selection_next, -- move to next result
-            ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+            ["<C-q>"] = actions.close,
+            -- ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
           },
         },
       },
@@ -59,6 +60,7 @@ return {
 
     keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
     keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
+    keymap.set('n', '<leader>sgf', builtin.git_files, { desc = '[S]earch [G]it [F]iles' })
     keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
     keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
     keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
