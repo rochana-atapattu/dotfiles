@@ -4,6 +4,7 @@ return {
   dependencies = {
     -- Required.
     "nvim-lua/plenary.nvim",
+    "nvim-telescope/telescope.nvim",
   },
   config = function()
     require("obsidian").setup {
@@ -50,6 +51,10 @@ return {
         date_format = "%Y-%m-%d-%a",
         time_format = "%H:%M",
       },
+      finder = "telescope.nvim",
     }
+    vim.keymap.set("n", "<leader>on", ":ObsidianNew ", { desc = "[O]bsidian [N]ew Note" })
+    vim.keymap.set("n", "<leader>os", "<cmd>ObsidianSearch<cr>", { desc = "[O]bsidian [S]earch Note" })
+    vim.keymap.set("n", "<leader>of", "<cmd>ObsidianQuickSwitch<cr>", { desc = "[O]bsidian Fuzzy [F]ind Note" })
   end,
 }
