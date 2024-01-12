@@ -48,7 +48,6 @@ return {
         c = { bg = colors.inactive_bg, fg = colors.semilightgray },
       },
     }
-
     -- configure lualine with modified theme
     lualine.setup {
       options = {
@@ -64,6 +63,12 @@ return {
           { "encoding" },
           { "fileformat" },
           { "filetype" },
+          {
+            require("noice").api.statusline.mode.get,
+            cond = require("noice").api.statusline.mode.has,
+            color = { fg = "#990511" },
+          }
+
         },
       },
     }
