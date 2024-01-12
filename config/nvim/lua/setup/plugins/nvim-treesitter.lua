@@ -14,7 +14,8 @@ return {
         "markdown",
         "markdown_inline",
         "sql",
-        "terraform"
+        "terraform",
+        "yaml"
       },
 
       highlight = { enable = true },
