@@ -54,7 +54,7 @@ return {
       finder = "telescope.nvim",
     }
     vim.keymap.set("n", "<leader>on", ":ObsidianNew ", { desc = "[O]bsidian [N]ew Note" })
-    vim.keymap.set("n", "<leader>os", "<cmd>ObsidianSearch<cr>", { desc = "[O]bsidian [S]earch Note" })
+    vim.keymap.set("n", "<leader>og", "<cmd>ObsidianSearch<cr>", { desc = "[O]bsidian [G]rep Note" })
     vim.keymap.set("n", "<leader>of", "<cmd>ObsidianQuickSwitch<cr>", { desc = "[O]bsidian Fuzzy [F]ind Note" })
   end,
 }
