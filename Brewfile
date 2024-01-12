@@ -76,3 +76,6 @@ brew "koekeishiya/formulae/skhd"
 brew "jesseduffield/lazygit/lazygit"
 
 brew "stylua"
+brew "act"
+brew "glow"
+brew "pngpaste"
