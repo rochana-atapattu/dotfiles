@@ -96,7 +96,6 @@ keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 keymap.set("i", "<C-c>", "<Esc>")
 
 keymap.set("n", "Q", "<nop>")
-keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 keymap.set("n", "<leader>f", vim.lsp.buf.format)
 
 keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
