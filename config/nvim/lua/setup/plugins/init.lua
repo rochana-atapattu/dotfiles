@@ -9,7 +9,6 @@ return {
 
   "sindrets/diffview.nvim",
 
-  
   "tpope/vim-surround",
 
   "mustache/vim-mustache-handlebars",
@@ -60,7 +59,6 @@ return {
       }
     end,
   },
-  "nvim-lualine/lualine.nvim", -- Fancier statusline
   {
     "folke/noice.nvim",
     config = function()
@@ -79,25 +77,6 @@ return {
               },
             },
             opts = { skip = true },
-          },
-        },
-        options = {
-          icons_enabled = true,
-          component_separators = "|",
-          section_separators = "",
-        },
-        sections = {
-          lualine_x = {
-            {
-              require("noice").api.statusline.mode.get,
-              cond = require("noice").api.statusline.mode.has,
-              color = { fg = "#ff9e64" },
-            },
-          },
-          lualine_a = {
-            {
-              "buffers",
-            },
           },
         },
       }
