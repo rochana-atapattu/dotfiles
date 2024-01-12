@@ -24,9 +24,6 @@ end
 vim.keymap.set('n', '<leader>df', confirm_and_delete_buffer,{desc = "Delete file"})
 
 -- Noice
-vim.api.nvim_set_keymap("n", "<leader>nn", ":NoiceDismiss<CR>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<leader>nn", ":NoiceDismiss<CR>", {noremap=true, desc = "Dismiss Notifications"})
 
-vim.keymap.set("n", "<leader>ee", "<cmd>GoIfErr<cr>",
-  {silent = true, noremap = true}
-)
 
