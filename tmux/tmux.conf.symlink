@@ -88,8 +88,6 @@ bind -r h resize-pane -L 5
 
 bind -r D neww -c "#{pane_current_path}" "[[ -e TODO.md ]] && nvim TODO.md || nvim ~/.dotfiles/personal/todo.md"
 
-# forget the find window.  That is for chumps
-bind-key -r f run-shell "tmux neww tmux-sessionizer"
 
 bind-key -r i run-shell "tmux neww tmux-cht.sh"
 bind-key -r R run-shell "tmux-sessionizer ~/repo"
