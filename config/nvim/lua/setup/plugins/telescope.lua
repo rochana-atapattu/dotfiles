@@ -90,7 +90,7 @@ return {
     -- keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
     -- keymap.set('n', '<leader>sb', builtin.buffers, { desc = '[ ] Find existing buffers' })
     -- keymap.set('n', '<leader>sS', builtin.git_status, { desc = '' })
-    -- keymap.set('n', '<leader>sB', builtin.git_branches, { desc = '' })
+    keymap.set('n', '<leader>fB', builtin.git_branches, { desc = '' })
     keymap.set('n', '<leader>fm', harpoon.marks, { desc = 'Harpoon [M]arks' })
     keymap.set("n", "<leader>fr", git_worktree.git_worktrees, { silent = true })
     keymap.set("n", "<leader>fR", git_worktree.create_git_worktree, { silent = true })

@@ -69,6 +69,7 @@ function tmux_last_session(){
     tmux attach -t $LAST_TMUX_SESSION
 }
 bindkey '^S' 'tmux_last_session ^M'
+bindkey -s ^f "tmux-sessionizer\n"
 
 
 # make terminal command navigation sane again
@@ -93,7 +94,6 @@ bindkey -M viins "^F" vi-forward-word               # [Ctrl-f] - move to next wo
 bindkey -M viins "^E" vi-add-eol                    # [Ctrl-e] - move to end of line
 bindkey "^N" history-beginning-search-forward
 bindkey "^P" history-beginning-search-backward
-bindkey -s ^f "tmux-sessionizer\n"
 # matches case insensitive for lowercase
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 

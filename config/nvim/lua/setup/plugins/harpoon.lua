@@ -9,19 +9,19 @@ return {
     local mark = require "harpoon.mark"
     local ui = require "harpoon.ui"
 
-    keymap.set("n", "<leader>a", mark.add_file)
+    keymap.set("n", "<leader>h", mark.add_file)
     keymap.set("n", "<C-e>", ui.toggle_quick_menu)
 
-    keymap.set("n", "<C-h>", function()
+    keymap.set("n", "<C-h>h", function()
       ui.nav_file(1)
     end)
-    keymap.set("n", "<C-t>", function()
+    keymap.set("n", "<C-h>j", function()
       ui.nav_file(2)
     end)
-    keymap.set("n", "<C-n>", function()
+    keymap.set("n", "<C-h>k", function()
       ui.nav_file(3)
     end)
-    keymap.set("n", "<C-s>", function()
+    keymap.set("n", "<C-h>l", function()
       ui.nav_file(4)
     end)
   end,

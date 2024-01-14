@@ -8,7 +8,7 @@ return {
   end
   },
   {
-    "ellisonleao/glow.nvim", 
+    "ellisonleao/glow.nvim",
     config = true,
     cmd = "Glow"
   }
