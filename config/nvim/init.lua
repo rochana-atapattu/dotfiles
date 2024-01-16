@@ -51,7 +51,6 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	{ import = "plugins" },
 	{ import = "plugins.extras.copilot" },
-	{ import = "plugins.extras.astro" },
 }, { ui = { border = theme.border } })
 
 cmd([[syntax on]])

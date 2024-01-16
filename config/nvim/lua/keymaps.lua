@@ -10,12 +10,22 @@ local vnoremap = utils.vnoremap
 
 -- Mappings
 vim.g.mapleader = " "
+-- Keymaps for better default experience
+-- See `:help vim.keymap.set()`
+nmap("<Space>", "<Nop>", { silent = true })
+vmap("<Space>", "<Nop>", { silent = true })
+
 vim.opt.pastetoggle = "<leader>v"
 
 nnoremap("Q", "<nop>")
 imap("jk", "<Esc>")
-nmap("<leader>,", ":silent w<cr>")
-nmap("<space>", ":silent set hlsearch! hlsearch?<cr>")
+nmap("QQ", ":q!<enter>")
+nmap("WW", ":w!<enter>")
+nmap("E", "$")
+nmap("B", "^")
+nnoremap("TT", ":TransparentToggle<CR>")
+nnoremap("st", ":TodoTelescope<CR>")
+nmap("ss", ":silent set hlsearch! hlsearch?<cr>")
 
 nmap("<leader><space>", [[:%s/\s\+$<cr>]])
 nmap("<leader><space><space>", [[:%s/\n\{2,}/\r\r/g<cr>]])
@@ -93,6 +103,87 @@ nmap("<leader>3", "<Plug>HiInterestingWord3")
 nmap("<leader>4", "<Plug>HiInterestingWord4")
 nmap("<leader>5", "<Plug>HiInterestingWord5")
 nmap("<leader>6", "<Plug>HiInterestingWord6")
+
+nmap("<leader>pv", vim.cmd.Ex)
+
+-- Normal Mode Key Mappings
+
+-- Move down half a screen and center
+nmap("<C-d>", "<C-d>zz")
+-- <C-d>: Moves the window down half a screen.
+-- zz: Centers the line with the cursor in the middle of the window.
+
+-- Move up half a screen and center
+nmap("<C-u>", "<C-u>zz")
+-- <C-u>: Moves the window up half a screen.
+-- zz: Centers the line with the cursor in the middle of the window.
+
+-- Repeat search forward, center and open folds
+-- nmap("n", "nzzzv")
+-- n: Repeat the last search, moving to the next match.
+-- zz: Centers the line with the cursor in the window.
+-- zv: Opens up any folded text at the cursor.
+
+-- Repeat search backward, center and open folds
+nmap("N", "Nzzzv")
+-- N: Repeat the last search, moving to the previous match.
+-- zz: Centers the line with the cursor in the window.
+-- zv: Opens up any folded text at the cursor.
+
+-- Join lines and return to original position
+nmap("J", "mzJ`z")
+-- mz: Sets a mark at the current cursor position with the name 'z'.
+-- J: Joins the current line with the next line.
+-- `z: Moves the cursor back to the mark 'z'.
+
+-- Disable Q in normal mode
+nmap("Q", "<nop>")
+
+-- Format buffer using LSP
+nmap("<leader>f", vim.lsp.buf.format)
+
+-- Quickfix and Location List Navigation
+-- nmap("<C-k>", "<cmd>cnext<CR>zz")
+-- nmap("<C-j>", "<cmd>cprev<CR>zz")
+-- nmap("<leader>k", "<cmd>lnext<CR>zz")
+-- nmap("<leader>j", "<cmd>lprev<CR>zz")
+-- <C-k>, <C-j>: Navigate through quickfix list items.
+-- <leader>k, <leader>j: Navigate through location list items.
+-- zz: Centers the cursor line in the middle of the window.
+
+-- Substitute word under cursor
+nmap("<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+
+-- Make file executable
+nmap("<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+
+-- Visual Mode Key Mappings
+
+-- Move selected line(s) down
+vmap("J", ":m '>+1<CR>gv=gv")
+-- :m '>+1: Move the selected block one line down.
+-- gv=gv: Reselect the block and reindent.
+
+-- Move selected line(s) up
+vmap("K", ":m '<-2<CR>gv=gv")
+-- :m '<-2: Move the selected block one line up.
+-- gv=gv: Reselect the block and reindent.
+
+-- Greatest remap for cut in visual mode
+vmap("<leader>p", [["_dP]])
+-- [["_d: Delete into the black hole register (no yank).
+-- P: Put before the cursor.
+
+-- Yank and Delete Remaps for Normal and Visual Modes
+nmap("<leader>y", [["+y]])
+vmap("<leader>y", [["+y]])
+nmap("<leader>Y", [["+Y]])
+nmap("<leader>d", [["_d]])
+vmap("<leader>d", [["_d]])
+-- <leader>y, <leader>Y: Yank to system clipboard.
+-- <leader>d: Delete without yanking.
+
+-- Insert Mode Key Mapping
 
 -- open current buffer in a new tab
 nmap("gTT", ":tab sb<cr>")
