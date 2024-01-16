@@ -12,6 +12,7 @@ if OS.mac?
     # Applications
     cask "imageoptim" # a tool to optimize images
     cask "1password/tap/1password-cli"
+    cask "wezterm" # a better terminal emulator
 
     # yabai
     brew "yabai"
