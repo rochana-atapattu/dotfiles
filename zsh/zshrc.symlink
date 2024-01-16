@@ -90,8 +90,8 @@ else
     bindkey "\e[3~" delete-char
 fi
 bindkey "^A" vi-beginning-of-line
-bindkey -M viins "^F" vi-forward-word               # [Ctrl-f] - move to next word
-bindkey -M viins "^E" vi-add-eol                    # [Ctrl-e] - move to end of line
+# bindkey -M viins "^F" vi-forward-word               # [Ctrl-f] - move to next word
+# bindkey -M viins "^E" vi-add-eol                    # [Ctrl-e] - move to end of line
 bindkey "^N" history-beginning-search-forward
 bindkey "^P" history-beginning-search-backward
 # matches case insensitive for lowercase

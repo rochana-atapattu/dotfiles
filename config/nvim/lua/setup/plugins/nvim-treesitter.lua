@@ -18,7 +18,8 @@ return {
         "hcl",
         "terraform",
         "yaml",
-        "html"
+        "html",
+        "rego"
       },
 
       highlight = { enable = true },
