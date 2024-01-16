@@ -3,7 +3,7 @@
 ## Initial setup
 
 The first thing you need to do is to clone this repo into a location of your
-choosing. For example, if you have a `~/Developer` directory where you clone all
+choosing. For example, if you have a `~/repo` directory where you clone all
 of your git repos, that's a good choice for this one, too. This repo is setup to
 not rely on the location of the dotfiles, so you can place it anywhere.
 
