@@ -10,6 +10,8 @@ local vnoremap = utils.vnoremap
 
 -- Mappings
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
 nmap("<Space>", "<Nop>", { silent = true })
@@ -38,10 +40,10 @@ vmap(">", ">gv")
 nmap("<leader>.", "<c-^>")
 vmap(".", ":normal .<cr>")
 
-nmap("<C-h>", "<Plug>WinMoveLeft")
-nmap("<C-j>", "<Plug>WinMoveDown")
-nmap("<C-k>", "<Plug>WinMoveUp")
-nmap("<C-l>", "<Plug>WinMoveRight")
+nmap("<S-h>", "<Plug>WinMoveLeft")
+nmap("<S-j>", "<Plug>WinMoveDown")
+nmap("<S-k>", "<Plug>WinMoveUp")
+nmap("<S-l>", "<Plug>WinMoveRight")
 
 -- helpers for dealing with other people's code
 nmap([[\t]], ":set ts=4 sts=4 sw=4 noet<cr>")
@@ -183,7 +185,8 @@ vmap("<leader>d", [["_d]])
 -- <leader>y, <leader>Y: Yank to system clipboard.
 -- <leader>d: Delete without yanking.
 
--- Insert Mode Key Mapping
-
+nmap("<leader>df", utils.confirm_and_delete_buffer, { desc = "Delete file" })
 -- open current buffer in a new tab
 nmap("gTT", ":tab sb<cr>")
+
+nmap("<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")

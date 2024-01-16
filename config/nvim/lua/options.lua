@@ -6,6 +6,8 @@ opt.backup = false -- don't use backup files
 opt.writebackup = false -- don't backup the file while editing
 opt.swapfile = false -- don't create swap files for new buffers
 opt.updatecount = 0 -- don't write swap files after some number of updates
+opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+opt.undofile = true
 
 opt.backupdir = { "~/.vim-tmp", "~/.tmp", "~/tmp", "/var/tmp", "/tmp" }
 
@@ -105,3 +107,6 @@ opt.listchars = {
 
 -- hide the ~ character on empty lines at the end of the buffer
 opt.fcs = "eob: "
+opt.conceallevel = 1
+opt.iskeyword:append("-") -- consider string-string as whole word
+opt.isfname:append("@-@")

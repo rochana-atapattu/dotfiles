@@ -83,6 +83,8 @@ return {
 			nnoremap("<leader>fb", "<cmd>Telescope buffers<cr>")
 			nnoremap("<leader>r", "<cmd>Telescope buffers<cr>")
 			nnoremap("<leader>fh", "<cmd>Telescope help_tags<cr>")
+			nnoremap("<leader>fm", "<cmd>lau require('telescope').extensions.harpoon.marks()<cr>")
+			nnoremap("<leader>fn", "<cmd>lua require('telescope').extensions.notify.notify()<cr>")
 			if vim.fn.isdirectory(".git") then
 				nnoremap("<leader>t", "<cmd>Telescope git_files<cr>")
 				nnoremap("<D-p>", "<cmd>Telescope git_files<cr>")
