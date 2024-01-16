@@ -1,34 +1,26 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 export ZSH=$DOTFILES/zsh
-alias pip='pip3'
-alias python='python3'
-export PATH="$PATH:~/Library/Python/3.10/bin"
+
 if [[ -d $DOTFILES/zsh/functions ]]; then
     for func in $DOTFILES/zsh/functions/*(:t); autoload -U $func
 fi
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
+
+export ZSH=$DOTFILES/zsh
 
 ########################################################
 # Configuration
 ########################################################
 
-if [ -z "$TMUX" ]; then
-    export TERM=xterm-256color-italic
-else
-    export TERM=tmux-256color
-fi
-
-
 # initialize autocomplete
 autoload -U compinit add-zsh-hook
 compinit
 
-# prepend_path $HOME/npmbin/node_modules/.bin
 prepend_path /usr/local/opt/grep/libexec/gnubin
 prepend_path /usr/local/sbin
 prepend_path $DOTFILES/bin
@@ -62,15 +54,7 @@ setopt HIST_IGNORE_ALL_DUPS      # delete old recorded entry if new entry is a d
 
 setopt COMPLETE_ALIASES
 
-
-function tmux_last_session(){
-    LAST_TMUX_SESSION=$(tmux list-sessions | awk -F ":" '{print$1}' | tail -n1);
-    echo $LAST_TMUX_SESSION
-    tmux attach -t $LAST_TMUX_SESSION
-}
-bindkey '^S' 'tmux_last_session ^M'
 bindkey -s ^f "tmux-sessionizer\n"
-
 
 # make terminal command navigation sane again
 bindkey "^[[1;5C" forward-word                      # [Ctrl-right] - forward one word
@@ -94,6 +78,7 @@ bindkey "^A" vi-beginning-of-line
 # bindkey -M viins "^E" vi-add-eol                    # [Ctrl-e] - move to end of line
 bindkey "^N" history-beginning-search-forward
 bindkey "^P" history-beginning-search-backward
+
 # matches case insensitive for lowercase
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
@@ -102,6 +87,12 @@ zstyle ':completion:*' insert-tab pending
 
 # default to file completion
 zstyle ':completion:*' completer _expand _complete _files _correct _approximate
+
+zstyle ':completion:*' verbose yes
+zstyle ':completion:*:descriptions' format '%B%d%b'
+zstyle ':completion:*:messages' format '%d'
+zstyle ':completion:*:warnings' format 'No matches for: %d'
+zstyle ':completion:*' group-name ''
 
 
 ########################################################
@@ -117,7 +108,6 @@ zfetch mafredri/zsh-async async.plugin.zsh
 zfetch zsh-users/zsh-syntax-highlighting
 zfetch zsh-users/zsh-autosuggestions
 zfetch grigorii-zander/zsh-npm-scripts-autocomplete
-# zfetch chriskempson/base16-shell
 zfetch Aloxaf/fzf-tab
 zfetch zsh-users/zsh-history-substring-search
 
@@ -131,13 +121,13 @@ fi
 # Setup
 ########################################################
 
-# add a config file for ripgrep
-export RIPGREP_CONFIG_PATH="$HOME/.rgrc"
 
-[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_DEFAULT_OPTS="--height=40% --layout=reverse --info=inline --preview 'cat {}' --border --margin=1 --padding=1"
+if [ -f $HOME/.fzf.zsh ]; then
+  source $HOME/.fzf.zsh
+  export FZF_DEFAULT_COMMAND='fd --type f'
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_DEFAULT_OPTS="--color bg:-1,bg+:-1,fg:-1,fg+:#feffff,hl:#993f84,hl+:#d256b5,info:#676767,prompt:#676767,pointer:#676767"
+fi
 
 # add color to man pages
 export MANROFFOPT='-c'
@@ -151,18 +141,16 @@ export LESS_TERMCAP_ue=$(tput rmul; tput sgr0)
 export LESS_TERMCAP_mr=$(tput rev)
 export LESS_TERMCAP_mh=$(tput dim)
 
-# source z.sh if it exists
-zpath="$(brew --prefix)/etc/profile.d/z.sh"
-if [ -f "$zpath" ]; then
-    source "$zpath"
+# prefer zoxide over z.sh
+if [[ -x "$(command -v zoxide)" ]]; then
+    eval "$(zoxide init zsh --hook pwd)"
+else
+  # source z.sh if it exists
+  zpath="$(brew --prefix)/etc/profile.d/z.sh"
+  if [ -f "$zpath" ]; then
+      source "$zpath"
+  fi
 fi
-
-########################################################
-# Aliases
-########################################################
-
-# reload zsh config
-alias reload!='RELOAD=1 source ~/.zshrc'
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
@@ -171,93 +159,30 @@ else # macOS `ls`
     colorflag="-G"
 fi
 
-# use nvim, but don't make me think about it
-if [[ -n "$(command -v nvim)" ]]; then
-    alias vim="nvim"
-    alias vimu="nvim +PlugUpdate +PlugUpgrade"
-    alias vimg="nvim +Ge:"
-fi
+# look for all .zsh files and source them
+config_files=($DOTFILES/**/*.zsh)
+for file in $config_files[@]; do
+  source "$file"
+done
 
-# Filesystem aliases
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
 
-alias l="ls -lah ${colorflag}"
-alias la="ls -AF ${colorflag}"
-alias ll="ls -lFh ${colorflag}"
-alias lld="ls -l | grep ^d"
-alias rmf="rm -rf"
 
-# Helpers
-alias grep='grep --color=auto'
-alias df='df -h' # disk free, in Gigabytes, not bytes
-alias du='du -h -c' # calculate disk usage for a folder
 
-# Applications
-alias ios='open -a /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app'
-
-# Hide/show all desktop icons (useful when presenting)
-alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
-alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
-
-# Recursively delete `.DS_Store` files
-alias cleanup="find . -name '*.DS_Store' -type f -ls -delete"
-# remove broken symlinks
-alias clsym="find -L . -name . -o -type d -prune -o -type l -exec rm {} +"
-
-# git aliases
-alias gs='git s'
-alias glog="git l"
-
-git config --global alias.checkout-all '!f() { if [ "$1" = "-B" ]; then git checkout -B ${2} && git submodule foreach --recursive git checkout -B ${2}; else git checkout $1 && git submodule foreach --recursive git checkout $1; fi }; f'
-git config alias.spush 'push --recurse-submodules=on-demand'
-# tmux aliases
-alias ta='tmux attach'
-alias tls='tmux ls'
-alias tat='tmux attach -t'
-alias tns='tmux new-session -s'
-
-alias lpath='echo $PATH | tr ":" "\n"' # list the PATH separated by new lines
-
-alias nr="npm run"
-
-#source "$DOTFILES/zsh/utils.zsh"
-#source "$DOTFILES/zsh/prompt.zsh"
-
-# If a local zshrc exists, source it
+# If a ~/.zshrc.local exists, source it
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+# If a ~/.localrc zshrc exists, source it
+[[ -a ~/.localrc ]] && source ~/.localrc
 
-if [[ -a ~/.localrc ]]; then
-    source ~/.localrc
-fi
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/rochana/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/rochana/Downloads/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/rochana/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/rochana/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
-
-export GOBIN=$HOME/bin
-export PATH="$PATH:$GOBIN"
-source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
+# source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /opt/homebrew/bin/terramate terramate
-
-export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 
-export SDKMAN_DIR=$(brew --prefix sdkman-cli)/libexec
-[[ -s "${SDKMAN_DIR}/bin/sdkman-init.sh" ]] && source "${SDKMAN_DIR}/bin/sdkman-init.sh"
+
+
 
 # source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
 # source /opt/homebrew/opt/chruby/share/chruby/auto.sh

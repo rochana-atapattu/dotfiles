@@ -1,3 +1,12 @@
+# vim:ft=gitconfig
+[user]
+	name = Rochana Atapattu
+	email = 31321610+rochana-atapattu@users.noreply.github.com
+[github]
+	user = rochana-atapattu
+[submodule]
+	recurse = true
+
 [init]
     defaultBranch = main
 [include]
@@ -10,22 +19,22 @@
     delete-merged-branches = "!f() { git checkout --quiet master && git branch --merged | grep --invert-match '\\*' | xargs -n 1 git branch --delete; git checkout --quiet @{-1}; }; f"
     # diff = diff --ignore-space-at-eol -b -w --ignore-blank-lines
     d = "!git diff --ignore-space-at-eol -b -w --ignore-blank-lines -- ':!**/package-lock.json' ':!**/yarn.lock'"
-    cnv = commit --no-verify
-    pnv = push --no-verify
+
+    # push new branch - push a branch to origin and set upstream
+    pnb = "!git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)"
+
     co = checkout
-    cob = checkout -b
     s = status --short --branch
-    ss  = status
     br = branch -v
     addnw = "!sh -c 'git diff -U0 -w --no-color \"$@\" | git apply --cached --ignore-whitespace --unidiff-zero -'"
     cane = commit --amend --no-edit
-    poh = push -u origin head
 
     # gh commands
     browse = "!gh repo view --web"
 
     # rebase commands
     cont = rebase --continue
+    continue = "!GIT_EDITOR=true git rebase --continue"
     conf = "!git s | grep ^U"
 
     l = log --graph --pretty=format:'%Cred%h%Creset %C(bold blue)%an%C(reset) - %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
@@ -35,10 +44,6 @@
 
     # show the committers in the last 100 commits, sorted by who has commited the most
     review = "!git log --no-merges --pretty=%an | head -n 100 | sort | uniq -c | sort -nr"
-
-    # Worktree helpers
-    wa = worktree add
-    wrm = worktree remove
 
     # order files by number of commits, ascending
     # Written by Corey Haines
@@ -55,6 +60,9 @@
 
     # current branch
     cbr = rev-parse --abbrev-ref HEAD
+
+    # show the current branch's upstream
+    upstream = rev-parse --abbrev-ref --symbolic-full-name @{u}
 
     # submodule shortcuts
     si = submodule init
@@ -85,8 +93,6 @@
     # clean up all 
     forget = "!git fetch -p origin && git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D"
 
-    # show the most recently touched branches
-    recent = "!git for-each-ref --sort='-committerdate' --format='%(color:red)%(refname)%(color:reset)%09%(committerdate)' refs/heads | sed -e 's-refs/heads/--' | less -XFR"
     latest = "!git for-each-ref --sort='-committerdate' --format='%(color:red)%(refname)%(color:reset)%09%(committerdate)' refs/remotes | sed -e 's-refs/remotes/origin/--' | less -XFR"
 
     # grep commands
@@ -105,7 +111,6 @@
     rg = "!sh -c 'git ls-files --others --exclude-standard | grep $1 | xargs rm' -"
 
     remotes = remote -v
-	checkout-all = "!f() { if [ \"$1\" = \"-B\" ]; then git checkout -B ${2} && git submodule foreach --recursive git checkout -B ${2}; else git checkout $1 && git submodule foreach --recursive git checkout $1; fi }; f"
 [color]
     diff = auto
     status = auto
@@ -139,14 +144,12 @@
     renames = copies
     mnemonicprefix = true
     compactionHeuristic = true
-	submodule = log
 [difftool]
     prompt = false
 [apply]
     # do not warn about missing whitespace at EOF
     whitespace = nowarn
 [core]
-    excludesfile = ~/.gitignore_global
     pager = delta
     editor = vim
     whitespace = cr-at-eol
@@ -176,14 +179,8 @@
     extendRegexp = true
     lineNumber = true
 [credential]
-	helper = store
+	helper = osxkeychain
 [rebase]
     instructionFormat = "[%an - %ar] %s"
     autoStash = true
-[user]
-	name = Rochana Atapattu
-	email = 31321610+rochana-atapattu@users.noreply.github.com
-[github]
-	user = rochana-atapattu
-[submodule]
-	recurse = true
+

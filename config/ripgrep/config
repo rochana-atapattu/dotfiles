@@ -23,7 +23,7 @@ test:*.{spec,test}.{ts,tsx,js,jsx}
 tsx:*.tsx
 
 --type-add
-stories:**/*.stories.{ts,tsx,js,jsx}
+stories:**/*.stories.{ts,tsx,js,jsx,mdx}
 
 --type-add
 jsx:*.jsx
@@ -36,6 +36,10 @@ pkg:package.json
 
 # ignore case
 --smart-case
+
+# Markdown (and MDX)
+--type-add
+md:*.{md,mdx}
 
 # follow symlinks
 --follow

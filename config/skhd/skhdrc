@@ -1,80 +1,69 @@
-# -- Changing Window Focus --
-# Quickly restart the yabai launch agent
-ctrl + alt + cmd - r : launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"
+# vim:ft=conf
 
 # open terminal
 cmd - return : open -a /Applications/iTerm.app/Contents/MacOS/iTerm2
 
-# -- Changing Window Focus --
 
-# change window focus within space
+ctrl + shift + alt + cmd - h : yabai -m window --focus west
+ctrl + shift + alt + cmd - j : yabai -m window --focus south
+ctrl + shift + alt + cmd - k : yabai -m window --focus north
+ctrl + shift + alt + cmd - l : yabai -m window --focus east
+
+alt - h : yabai -m window --focus west
 alt - j : yabai -m window --focus south
 alt - k : yabai -m window --focus north
-alt - h : yabai -m window --focus west
 alt - l : yabai -m window --focus east
 
-#change focus between external displays (left and right)
-alt - a: yabai -m display --focus west
-alt - d: yabai -m display --focus east
-
-# -- Modifying the Layout --
-
-# rotate layout clockwise
-shift + alt - r : yabai -m space --rotate 270
-
-# flip along y-axis
-shift + alt - y : yabai -m space --mirror y-axis
-
-# flip along x-axis
-shift + alt - x : yabai -m space --mirror x-axis
-
-# toggle window float
-shift + alt - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
-
-
-# -- Modifying Window Size --
-
-# maximize a window
-shift + alt - m : yabai -m window --toggle zoom-fullscreen
-
-# balance out tree of windows (resize to occupy same area)
-shift + alt - e : yabai -m space --balance
-
-# -- Moving Windows Around --
-
-# swap windows
+# swap managed windows
+shift + alt - h : yabai -m window --swap west
 shift + alt - j : yabai -m window --swap south
 shift + alt - k : yabai -m window --swap north
-shift + alt - h : yabai -m window --swap west
 shift + alt - l : yabai -m window --swap east
 
-# move window and split
-ctrl + alt - j : yabai -m window --warp south
-ctrl + alt - k : yabai -m window --warp north
-ctrl + alt - h : yabai -m window --warp west
-ctrl + alt - l : yabai -m window --warp east
+# move managed windows
+shift + alt + ctrl -h : yabai -m window --warp west
+shift + alt + ctrl -j : yabai -m window --warp south
+shift + alt + ctrl -k : yabai -m window --warp north
+shift + alt + ctrl -l : yabai -m window --warp east
 
-# move window to display left and right
-shift + alt - s : yabai -m window --display west; yabai -m display --focus west;
-shift + alt - g : yabai -m window --display east; yabai -m display --focus east;
+alt - r : yabai -m window --rotate 90
 
+alt - f : yabai -m window --toggle zoom-fullscreen
 
-# move window to prev and next space
-shift + alt - p : yabai -m window --space prev;
-shift + alt - n : yabai -m window --space next;
+alt - g : yabai -m space --toggle padding; yabai -m space --toggle gap
 
-# move window to space #
-shift + alt - 1 : yabai -m window --space 1;
-shift + alt - 2 : yabai -m window --space 2;
-shift + alt - 3 : yabai -m window --space 3;
-shift + alt - 4 : yabai -m window --space 4;
-shift + alt - 5 : yabai -m window --space 5;
-shift + alt - 6 : yabai -m window --space 6;
-shift + alt - 7 : yabai -m window --space 7;
-# APPS #
-#
-# Slack
-alt - s : open -a /Applications/Slack.app/Contents/MacOS/Slack
+alt - t : yabai -m window --toggle float;\
+          yabai -m window --grid 4:4:1:1:2:2
 
-# firefox
-alt - f : open -a /Applications/Firefox.app/Contents/MacOS/firefox
+alt - e : yabai -m window --toggle split
+
+shift + alt - 0 : yabai -m space --balance
+
+alt - s : yabai -m window --toggle sticky;\
+          yabai -m window --toggle topmost;\
+          yabai -m window --toggle pip
+
+# ###########################################################################
+# NOTE: the following isn't supported without SIP being (partially) disabled
+# I'm still very wary of doing that, so I may not use this feature
+# ###########################################################################
+
+shift + alt - 1 : yabai -m window --space 1; yabai -m space --focus 1
+shift + alt - 2 : yabai -m window --space 2; yabai -m space --focus 2
+shift + alt - 3 : yabai -m window --space 3; yabai -m space --focus 3
+shift + alt - 4 : yabai -m window --space 4; yabai -m space --focus 4
+shift + alt - 5 : yabai -m window --space 5; yabai -m space --focus 5
+shift + alt - 6 : yabai -m window --space 6; yabai -m space --focus 6
+shift + alt - 7 : yabai -m window --space 7; yabai -m space --focus 7
+shift + alt - 8 : yabai -m window --space 8; yabai -m space --focus 8
+shift + alt - 9 : yabai -m window --space 9; yabai -m space --focus 9
+
+shift + alt - n : yabai -m space --create && \
+                  index="$(yabai -m query --spaces --display | jq 'map(select(."native-fullscreen" == 0))[-1].index')" && \
+                  yabai -m window --space "${index}" && \
+                  yabai -m space --focus "${index}"
+
+alt - tab : yabai -m space --focus recent
+
+shift + alt - n : yabai -m window --display next; yabai -m display --focus next
+shift + alt - p : yabai -m window --display previous; yabai -m display --focus previous
