@@ -69,7 +69,7 @@ setup_symlinks() {
     for file in $(get_linkables) ; do
         target="$HOME/.$(basename "$file" '.symlink')"
         if [ -e "$target" ]; then
-            info "~${target#$HOME} already exists... Skipping."
+            info "~${target#"$HOME"} already exists... Skipping."
 	else
             info "Creating symlink for $file"
             ln -s "$file" "$target"
@@ -87,7 +87,7 @@ setup_symlinks() {
     for config in $config_files; do
         target="$HOME/.config/$(basename "$config")"
         if [ -e "$target" ]; then
-            info "~${target#$HOME} already exists... Skipping."
+            info "~${target#"$HOME"} already exists... Skipping."
 	else
             info "Creating symlink for $config"
             ln -s "$config" "$target"
@@ -186,6 +186,9 @@ setup_macos() {
 
         echo "show hidden files by default"
         defaults write com.apple.Finder AppleShowAllFiles -bool false
+        
+        echo "When opening a folder on the desktop there's an animation that conflicts with yabai trying to tile the window. This animation can be disabled"
+        defaults write com.apple.finder DisableAllAnimations -bool true
 
         echo "only use UTF-8 in Terminal.app"
         defaults write com.apple.terminal StringEncodings -array 4

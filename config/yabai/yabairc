@@ -10,10 +10,10 @@ yabai -m config normal_window_opacity 0.9
 
 yabai -m config layout bsp
 yabai -m config top_padding 16
-yabai -m config bottom_padding 16
-yabai -m config left_padding 16
-yabai -m config right_padding 16
-yabai -m config window_gap 16
+yabai -m config bottom_padding 6
+yabai -m config left_padding   6
+yabai -m config right_padding  6
+yabai -m config window_gap     6
 
 # ignore these apps
 yabai -m rule --add app="^System Settings$" manage=off
@@ -32,5 +32,5 @@ yabai -m rule --add app="^Finder$" manage=off
 yabai -m config mouse_modifier fn
 yabai -m config mouse_action1 move
 yabai -m config mouse_action2 resize
-yabai -m config mouse_follows_focus off
-yabai -m c config focus_follows_mouse off
+yabai -m config mouse_follows_focus on
+yabai -m config focus_follows_mouse autoraise
