@@ -1,7 +1,7 @@
 # vim:ft=conf
 
 # open terminal
-cmd - return : open -a /Applications/iTerm.app/Contents/MacOS/iTerm2
+cmd - return : open -a /Applications/WezTerm.app/Contents/MacOS/wezterm
 
 
 ctrl + shift + alt + cmd - h : yabai -m window --focus west
@@ -35,13 +35,16 @@ alt - g : yabai -m space --toggle padding; yabai -m space --toggle gap
 alt - t : yabai -m window --toggle float;\
           yabai -m window --grid 4:4:1:1:2:2
 
-alt - e : yabai -m window --toggle split
+shift + alt - e : yabai -m window --toggle split
 
 shift + alt - 0 : yabai -m space --balance
 
 alt - s : yabai -m window --toggle sticky;\
           yabai -m window --toggle topmost;\
           yabai -m window --toggle pip
+
+alt - w : yabai -m display --focus west
+alt - e : yabai -m display --focus east
 
 # ###########################################################################
 # NOTE: the following isn't supported without SIP being (partially) disabled

@@ -24,6 +24,7 @@ return {
 			-- Helpers to install LSPs and maintain them
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
+			"j-hui/fidget.nvim",
 		},
 		config = function()
 			require("plugins.lsp.config").setup()

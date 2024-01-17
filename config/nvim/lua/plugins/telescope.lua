@@ -7,8 +7,16 @@ return {
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 			"nvim-telescope/telescope-rg.nvim",
 			"nvim-telescope/telescope-node-modules.nvim",
+			{
+				"debugloop/telescope-undo.nvim",
+				keys = { { "<leader>U", "<cmd>Telescope undo<cr>" } },
+				config = function()
+					require("telescope").load_extension("undo")
+				end,
+			},
 		},
 		config = function()
+			require("telescope").load_extension("noice")
 			require("telescope").setup({
 				defaults = {
 					mappings = {

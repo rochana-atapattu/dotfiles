@@ -102,11 +102,20 @@ end
 
 function M.confirm_and_delete_buffer()
 	local confirm = vim.fn.confirm("Delete buffer and file?", "&Yes\n&No", 2)
-
+	print("del")
 	if confirm == 1 then
 		os.remove(vim.fn.expand("%"))
 		vim.api.nvim_buf_delete(0, { force = true })
 	end
+end
+
+function M.colorMyPenciles()
+	print("colorMyPenciles")
+	local color = "rose-pine"
+	vim.cmd.colorscheme(color)
+
+	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 end
 
 return M

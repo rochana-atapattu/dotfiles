@@ -20,7 +20,7 @@ vmap("<Space>", "<Nop>", { silent = true })
 vim.opt.pastetoggle = "<leader>v"
 
 nnoremap("Q", "<nop>")
-imap("jk", "<Esc>")
+inoremap("jk", "<Esc>")
 nmap("QQ", ":q!<enter>")
 nmap("WW", ":w!<enter>")
 nmap("E", "$")

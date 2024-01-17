@@ -8,6 +8,7 @@ return {
 	"AndrewRadev/splitjoin.vim",
 	"tpope/vim-sleuth",
 	"editorconfig/editorconfig-vim", -- TODO is this still required?
+	"folke/zen-mode.nvim",
 	{
 		"andymass/vim-matchup",
 		config = function()
@@ -16,7 +17,7 @@ return {
 	},
 	{ "itchyny/vim-qfedit", event = "VeryLazy" },
 	{ "windwp/nvim-autopairs", config = true },
-	{ "alvarosevilla95/luatab.nvim", config = true },
+	{ "alvarosevilla95/luatab.nvim", dependencies = { "nvim-tree/nvim-web-devicons" }, config = true },
 	{ "MunifTanjim/nui.nvim", lazy = true },
 
 	-- improve the default neovim interfaces, such as refactoring

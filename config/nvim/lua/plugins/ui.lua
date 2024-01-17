@@ -1,4 +1,5 @@
 local theme = require("theme")
+local utils = require("utils")
 local icons = theme.icons
 
 local is_dark = require("utils").is_dark_mode()
@@ -25,9 +26,9 @@ return {
 	},
 	{
 		"folke/noice.nvim",
-		event = "VeryLazy",
+		-- event = "VeryLazy",
 		opts = {
-			-- add any options here
+			-- 	-- add any options here
 			lsp = {
 				-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
 				override = {
@@ -46,10 +47,25 @@ return {
 			},
 			routes = {
 				{
-					filter = { find = "No information available" },
-					opts = { stop = true },
+					filter = {
+						event = "msg_show",
+						any = {
+							{ find = "%d+L, %d+B" },
+							{ find = "; after #%d+" },
+							{ find = "; before #%d+" },
+							{ find = "%d fewer lines" },
+							{ find = "%d more lines" },
+						},
+					},
+					opts = { skip = true },
 				},
 			},
+			-- 	routes = {
+			-- 		{
+			-- 			filter = { find = "No information available" },
+			-- 			opts = { stop = true },
+			-- 		},
+			-- 	},
 		},
 		dependencies = {
 			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
@@ -196,74 +212,6 @@ return {
 			lualine_bold = false, -- When `true`, section headers in the lualine theme will be bold
 		},
 	},
-
-	-- everforest theme
-	{
-		"neanias/everforest-nvim",
-		version = false,
-		lazy = false,
-		priority = 1000, -- make sure to load this before all the other start plugins
-		-- Optional; default configuration will be used if setup isn't called.
-		config = function()
-			require("everforest").setup({
-				transparent_background_level = 2,
-			})
-		end,
-	},
-
-	-- Catppuccin theme
-	{
-		"catppuccin/nvim",
-		name = "catppuccin",
-		lazy = false,
-		priority = 1000,
-		opts = {
-			flavour = require("utils").is_dark_mode() and "mocha" or "latte",
-			dim_inactive = { enabled = false, shade = "dark", percentage = 0.15 },
-			transparent_background = true,
-			term_colors = true,
-			compile = { enabled = true, path = vim.fn.stdpath("cache") .. "/catppuccin", suffix = "_compiled" },
-			styles = {
-				comments = { "italic" },
-				conditionals = { "italic" },
-				loops = {},
-				functions = { "bold" },
-				keywords = {},
-				strings = {},
-				variables = {},
-				numbers = {},
-				booleans = {},
-				properties = {},
-				types = {},
-				operators = {},
-			},
-			integrations = {
-				treesitter = true,
-				native_lsp = {
-					enabled = true,
-					virtual_text = {
-						errors = { "italic" },
-						hints = { "italic" },
-						warnings = { "italic" },
-						information = { "italic" },
-					},
-					underlines = {
-						errors = { "underline" },
-						hints = { "underline" },
-						warnings = { "underline" },
-						information = { "underline" },
-					},
-				},
-				lsp_trouble = false,
-				cmp = true,
-				gitsigns = true,
-				telescope = true,
-				markdown = true,
-				ts_rainbow = true,
-			},
-		},
-	},
-
 	-- Prettier notifications
 	{
 		"rcarriga/nvim-notify",
