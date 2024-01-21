@@ -7,6 +7,7 @@ return {
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 			"nvim-telescope/telescope-rg.nvim",
 			"nvim-telescope/telescope-node-modules.nvim",
+			"ThePrimeagen/git-worktree.nvim",
 			{
 				"debugloop/telescope-undo.nvim",
 				keys = { { "<leader>U", "<cmd>Telescope undo<cr>" } },
@@ -17,6 +18,14 @@ return {
 		},
 		config = function()
 			require("telescope").load_extension("noice")
+require("telescope").load_extension("git_worktree")
+
+			require('telescope').load_extension('harpoon')
+			require('telescope').load_extension('notify')
+
+			-- Enable telescope fzf native, if installed
+			pcall(require('telescope').load_extension, 'fzf')
+
 			require("telescope").setup({
 				defaults = {
 					mappings = {
@@ -82,6 +91,12 @@ return {
 				},
 			})
 
+			local Worktree = require("git-worktree")
+			Worktree.on_tree_change(function(op, metadata)
+				if op == Worktree.Operations.Switch then
+					print("Switched from " .. metadata.prev_path .. " to " .. metadata.path)
+				end
+			end)
 			local nnoremap = require("utils").nnoremap
 			nnoremap("<leader>ff", "<cmd>Telescope find_files<cr>")
 			nnoremap("<leader>fs", "<cmd>Telescope git_files<cr>")
@@ -93,6 +108,9 @@ return {
 			nnoremap("<leader>fh", "<cmd>Telescope help_tags<cr>")
 			nnoremap("<leader>fm", "<cmd>lau require('telescope').extensions.harpoon.marks()<cr>")
 			nnoremap("<leader>fn", "<cmd>lua require('telescope').extensions.notify.notify()<cr>")
+			nnoremap("<leader>fw", "<cmd>lua require('telescope').extensions.git_worktree.git_worktrees()<cr>")
+			nnoremap("<leader>fww", "<cmd>lua require('telescope').extensions.git_worktree.create_git_worktree()<cr>")
+			nnoremap("<leader>fu", "<cmd>lua require('telescope').extensions.undotree.undotree()<cr>")
 			if vim.fn.isdirectory(".git") then
 				nnoremap("<leader>t", "<cmd>Telescope git_files<cr>")
 				nnoremap("<D-p>", "<cmd>Telescope git_files<cr>")

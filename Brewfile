@@ -70,10 +70,11 @@ brew "python" # python (latest)
 brew "ripgrep" # very fast file searcher
 brew "shellcheck" # diagnostics for shell sripts
 brew "tmux" # terminal multiplexer
+brew "zellij" # terminal multiplexer
 brew "tree" # pretty-print directory contents
 brew "vim" # Vim (latest)
 brew "wdiff" # word differences in text files
-brew "wget" # internet file retriever
+brew "wget" # internet file retrieverbre
 brew "z" # switch between most used directories
 brew "zoxide" # switch between most used directories
 brew "zsh" # zsh (latest)
