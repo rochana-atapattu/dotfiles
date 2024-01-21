@@ -1,9 +1,11 @@
 return {
 	{
 		"nvim-telescope/telescope.nvim",
+		branch = '0.1.x',
 		lazy = false,
 		dependencies = {
 			"nvim-lua/plenary.nvim", -- Power telescope with FZF
+			'nvim-telescope/telescope-symbols.nvim',
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 			"nvim-telescope/telescope-rg.nvim",
 			"nvim-telescope/telescope-node-modules.nvim",
@@ -18,7 +20,7 @@ return {
 		},
 		config = function()
 			require("telescope").load_extension("noice")
-require("telescope").load_extension("git_worktree")
+			require("telescope").load_extension("git_worktree")
 
 			require('telescope').load_extension('harpoon')
 			require('telescope').load_extension('notify')
@@ -67,7 +69,7 @@ require("telescope").load_extension("git_worktree")
 					file_sorter = require("telescope.sorters").get_fuzzy_file,
 					file_ignore_patterns = { "node_modules" },
 					generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
-					path_display = { "truncate" },
+					-- path_display = { "truncate" },
 					winblend = 0,
 					border = {},
 					borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
