@@ -105,3 +105,6 @@ brew "act" # Run your GitHub Actions locally!
 #Open Policy Agent
 brew "opa"
 brew "conftest"
+
+
+brew "postgresql"

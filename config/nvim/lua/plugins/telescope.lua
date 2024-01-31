@@ -1,7 +1,6 @@
 return {
 	{
 		"nvim-telescope/telescope.nvim",
-		branch = '0.1.x',
 		lazy = false,
 		dependencies = {
 			"nvim-lua/plenary.nvim", -- Power telescope with FZF
@@ -17,6 +16,7 @@ return {
 					require("telescope").load_extension("undo")
 				end,
 			},
+			"nvim-telescope/telescope-file-browser.nvim",
 		},
 		config = function()
 			require("telescope").load_extension("noice")
@@ -25,6 +25,7 @@ return {
 			require('telescope').load_extension('harpoon')
 			require('telescope').load_extension('notify')
 
+			require('telescope').load_extension('file_browser')
 			-- Enable telescope fzf native, if installed
 			pcall(require('telescope').load_extension, 'fzf')
 
@@ -90,6 +91,11 @@ return {
 						override_file_sorter = true,
 						case_mode = "smart_case",
 					},
+					file_browser = {
+						theme = "ivy",
+						-- disables netrw and use telescope-file-browser in its place
+						hijack_netrw = true,
+					}
 				},
 			})
 
@@ -100,11 +106,13 @@ return {
 				end
 			end)
 			local nnoremap = require("utils").nnoremap
+			nnoremap("<leader>fr", "<cmd>Telescope file_browser<cr>")
+			nnoremap("<leader>fc", "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>")
 			nnoremap("<leader>ff", "<cmd>Telescope find_files<cr>")
 			nnoremap("<leader>fs", "<cmd>Telescope git_files<cr>")
-			nnoremap("<leader>fo", "<cmd>Telescope oldfiles<cr>")
-			nnoremap("<leader>fg", "<cmd>Telescope live_grep<cr>")
-			nnoremap("<leader>fr", "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>")
+			-- nnoremap("<leader>fo", "<cmd>Telescope oldfiles<cr>")
+			-- nnoremap("<leader>fg", "<cmd>Telescope live_grep<cr>")
+			nnoremap("<leader>fg", "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>")
 			nnoremap("<leader>fb", "<cmd>Telescope buffers<cr>")
 			nnoremap("<leader>r", "<cmd>Telescope buffers<cr>")
 			nnoremap("<leader>fh", "<cmd>Telescope help_tags<cr>")

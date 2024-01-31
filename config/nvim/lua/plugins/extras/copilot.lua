@@ -9,7 +9,7 @@ return {
 				enabled = true,
 				auto_trigger = true,
 				keymap = {
-					-- accept = "<Tab>",
+					accept = "<Tab>",
 					close = "<Esc>",
 					next = "<C-J>",
 					prev = "<C-K>",

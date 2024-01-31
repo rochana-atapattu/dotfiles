@@ -1,5 +1,5 @@
-
 #!/usr/bin/env bash
+# vim:ft=sh
 
 if [[ $# -eq 1 ]]; then
     selected=$1
@@ -14,5 +14,6 @@ fi
 selected_name=$(basename "$selected" | tr '. ' '_')
 NO_SESSIONS=$(echo "${ZJ_SESSIONS}" | wc -l)
 
+zellij action close-tab
 zellij attach -c $selected_name options --default-cwd $selected
 

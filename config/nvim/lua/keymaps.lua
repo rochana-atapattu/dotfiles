@@ -68,11 +68,11 @@ vnoremap(opt_j, ":m '>+1<cr>gv=gv")
 vnoremap(opt_k, ":m '<-2<cr>gv=gv")
 
 -- wrap visual selection in provided wrapper
-vnoremap("$(", "<esc>`>a)<esc>`<i(<esc>") -- wrap in parentheses
-vnoremap("$[", "<esc>`>a]<esc>`<i[<esc>") -- wrap in brackets
-vnoremap("${", "<esc>`>a}<esc>`<i{<esc>") -- wrap in braces
+vnoremap("$(", "<esc>`>a)<esc>`<i(<esc>")     -- wrap in parentheses
+vnoremap("$[", "<esc>`>a]<esc>`<i[<esc>")     -- wrap in brackets
+vnoremap("${", "<esc>`>a}<esc>`<i{<esc>")     -- wrap in braces
 vnoremap([[$']], [[<esc>`>a"<esc>`<i"<esc>]]) -- wrap in quotes
-vnoremap("$'", "<esc>`>a'<esc>`<i'<esc>") -- wrap in single quotes
+vnoremap("$'", "<esc>`>a'<esc>`<i'<esc>")     -- wrap in single quotes
 vnoremap([[$\]], "<esc>`>o*/<esc>`<O/*<esc>")
 vnoremap([[$<]], "<esc>`>a><esc>`<i<<esc>")
 
@@ -142,7 +142,7 @@ nmap("J", "mzJ`z")
 nmap("Q", "<nop>")
 
 -- Format buffer using LSP
-nmap("<leader>f", vim.lsp.buf.format)
+nmap("<leader>lf", vim.lsp.buf.format)
 
 -- Quickfix and Location List Navigation
 -- nmap("<C-k>", "<cmd>cnext<CR>zz")

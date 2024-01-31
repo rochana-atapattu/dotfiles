@@ -96,6 +96,7 @@ function M.setup()
 			"tailwindcss",
 			"gopls",
 			"templ",
+			"html",
 			"htmx",
 			"terraformls",
 			"tflint",
@@ -128,6 +129,8 @@ function M.setup()
 					"tailwind.config.ts",
 					"tailwind.config.cjs"
 				),
+				filetypes = { "templ", "astro", "javascript", "typescript", "react" },
+				init_options = { userLanguages = { templ = "html" } },
 				settings = {
 					tailwindCSS = {
 						lint = {
@@ -239,10 +242,16 @@ function M.setup()
 				-- root_dir = require("lspconfig/util").root_pattern(".templ", ".git"),
 			}))
 		end,
+		html = function()
+			lspconfig.html.setup(make_conf({
+				-- cmd = { "html-languageserver", "--stdio" },
+				filetypes = { "html", "templ" },				-- root_dir = require("lspconfig/util").root_pattern(".html", ".git"),
+			}))
+		end,
 		htmx = function()
 			lspconfig.htmx.setup(make_conf({
 				-- cmd = { "htmx" },
-				filetypes = { "htmx" },
+				filetypes = { "htmx","html", "templ" },
 				-- root_dir = require("lspconfig/util").root_pattern(".htmx", ".git"),
 			}))
 		end,

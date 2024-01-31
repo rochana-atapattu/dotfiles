@@ -24,6 +24,7 @@ typeset -aU path
 export EDITOR='nvim'
 export GIT_EDITOR='nvim'
 
+export CLOUDSDK_PYTHON_SITEPACKAGES=1
 # if [ -z "$TMUX" ]; then
 #     export TERM=xterm-256color-italic
 # else

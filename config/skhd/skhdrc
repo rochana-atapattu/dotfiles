@@ -2,6 +2,8 @@
 
 # open terminal
 cmd - return : open -a /Applications/WezTerm.app/Contents/MacOS/wezterm
+shift + alt - s : open -a /Applications/Slack.app/Contents/MacOS/slack	
+shift + alt - f : open -a /Applications/Firefox.app/Contents/MacOS/firefox
 
 
 ctrl + shift + alt + cmd - h : yabai -m window --focus west
@@ -46,6 +48,8 @@ alt - s : yabai -m window --toggle sticky;\
 alt - w : yabai -m display --focus west
 alt - e : yabai -m display --focus east
 
+alt - i : yabai -m window --focus west
+alt - o : yabai -m window --focus east
 # ###########################################################################
 # NOTE: the following isn't supported without SIP being (partially) disabled
 # I'm still very wary of doing that, so I may not use this feature

@@ -111,3 +111,5 @@ function _G.Lint()
 
 	vim.o.errorformat = current_efm
 end
+
+vim.filetype.add({ extension = { templ = "templ" } })

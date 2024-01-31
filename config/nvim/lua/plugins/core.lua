@@ -5,6 +5,7 @@ return {
 	"tpope/vim-ragtag",
 	"tpope/vim-abolish",
 	"tpope/vim-repeat",
+	"tpope/vim-dadbod",
 	"AndrewRadev/splitjoin.vim",
 	"tpope/vim-sleuth",
 	"editorconfig/editorconfig-vim", -- TODO is this still required?
