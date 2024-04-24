@@ -4,7 +4,7 @@ set -Eeuo pipefail
 trap cleanup SIGINT SIGTERM ERR EXIT
 
 usage() {
-  cat << EOF # remove the space between << and EOF, this is due to web plugin issue
+  cat << EOF
 Usage: $(basename "${BASH_SOURCE[0]}") [-h] [-v] [-l] repository
 
 Clone a bare git repo and set up environment for working comfortably and exclusively from worktrees.
@@ -13,13 +13,14 @@ Available options:
 
 -h, --help      Print this help and exit
 -v, --verbose   Print script debug info
--l, --location  Location of the bare repo contents (default: .bare)
+-l, --location  Location of the bare repo contents (default: based on CODE_DIR or current directory and includes org name)
 EOF
   exit
 }
 
 cleanup() {
   trap - SIGINT SIGTERM ERR EXIT
+  # Your cleanup code here
 }
 
 setup_colors() {
@@ -42,7 +43,7 @@ die() {
 }
 
 parse_params() {
-  location='.bare'
+  location='' # Default location is now empty, will be set later
 
   while :; do
     case "${1-}" in
@@ -50,7 +51,7 @@ parse_params() {
     -v | --verbose) set -x ;;
     --no-color) NO_COLOR=1 ;;
     -l | --location)
-        location="${2-}" 
+        location="${2-}"
         shift
         ;;
     -?*) die "Unknown option: $1" ;;
@@ -61,9 +62,16 @@ parse_params() {
 
   args=("$@")
 
-  # check required params and arguments
-  # [[ -z "${param-}" ]] && die "Missing required parameter: param"
   [[ ${#args[@]} -eq 0 ]] && die "Missing script arguments"
+
+  if [[ -z "$location" ]]; then
+    # Determine the base directory: use CODE_DIR if set, otherwise use current directory
+    local base_dir="${CODE_DIR:-$(pwd)}"
+    # Extract org and repo name from the URL
+    local repo_url="${args[0]}"
+    local repo_path=$(echo "$repo_url" | sed -E 's/.*[:\/](.+\/.+)\.git/\1/')
+    location="$base_dir/$repo_path/.git"
+  fi
 
   return 0
 }
@@ -71,8 +79,14 @@ parse_params() {
 parse_params "$@"
 setup_colors
 
+# Ensure the directory exists before cloning
+if [[ ! -d "$location" ]]; then
+  msg "${YELLOW}Creating directory $location...${NOFORMAT}"
+  mkdir -p "$location"
+fi
+
 msg "${YELLOW}Cloning bare repository to $location...${NOFORMAT}"
-git clone --bare "${args[@]}" "$location"
+git clone --bare "${args[0]}" "$location"
 pushd "$location" > /dev/null
 msg "${YELLOW}Adjusting origin fetch locations...${NOFORMAT}"
 git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"

@@ -33,9 +33,9 @@ return {
 	{
 		"stevearc/conform.nvim",
 		config = function()
-			local conform = require "conform"
+			local conform = require("conform")
 
-			conform.setup {
+			conform.setup({
 				formatters_by_ft = {
 					javascript = { "prettier" },
 					typescript = { "prettier" },
@@ -51,19 +51,20 @@ return {
 					lua = { "stylua" },
 					python = { "isort", "black" },
 					go = { "goimports", "gofmt" },
-					templ = {  "templ"  },
+					templ = { "templ" },
 					terraform = { "terraform_fmt" },
 					rego = { "opa_fmt" },
-				}
-			}
+					java = { "google-java-format" },
+				},
+			})
 
 			local nnoremap = require("utils").nnoremap
 			nnoremap("<leader>f", function()
-				conform.format {
+				conform.format({
 					lsp_fallback = true,
 					async = false,
 					timeout_ms = 1000,
-				}
+				})
 			end, { desc = "Format file or range (in visual mode)" })
 		end,
 	},
@@ -79,4 +80,20 @@ return {
 			{ "<leader>xl", "<cmd>TroubleToggle loclist<cr>" },
 		},
 	},
+	-- {
+	-- 	"jay-babu/mason-null-ls.nvim",
+	-- 	event = { "BufReadPre", "BufNewFile" },
+	-- 	dependencies = {
+	-- 		"williamboman/mason.nvim",
+	-- 	},
+	-- 	config = function()
+	-- 		require("mason-null-ls").setup({
+	-- 			ensure_installed = {
+	-- 			"stylua",
+	-- 			"jq",
+	-- 			"google-java-format",
+	-- 			}
+	-- 		})
+	-- 	end,
+	-- },
 }

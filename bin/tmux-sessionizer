@@ -3,7 +3,7 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    IFS=$'\n' read -r selected <<< "$(find ~/repo ~/repo/misc ~/repo/rochana-atapattu/ ~/repo/prodoscore "$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/" -mindepth 1 -maxdepth 1 -type d | fzf)"
+    IFS=$'\n' read -r selected <<< "$(find ~/Downloads ~/repo ~/repo/misc ~/repo/rochana-atapattu/ ~/repo/codimite-devops ~/repo/codimite ~/repo/prodoscore "$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/" -mindepth 1 -maxdepth 1 -type d | fzf)"
 fi
 
 if [[ -z $selected ]]; then

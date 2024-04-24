@@ -101,6 +101,7 @@ function M.setup()
 			"terraformls",
 			"tflint",
 			"marksman",
+			"jdtls",
 		},
 		automatic_installation = true,
 		ui = { check_outdated_servers_on_open = true },
@@ -144,6 +145,7 @@ function M.setup()
 						},
 						experimental = {
 							classRegex = {
+								'class="([^"]*)',
 								"tw`([^`]*)",
 								'tw="([^"]*)',
 								'tw={"([^"}]*)',

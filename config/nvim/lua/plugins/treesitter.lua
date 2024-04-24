@@ -53,6 +53,7 @@ return {
 				"hcl",
 				"terraform",
 				"rego",
+				"java",
 			},
 			incremental_selection = {
 				enable = true,

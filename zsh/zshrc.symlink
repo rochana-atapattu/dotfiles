@@ -120,13 +120,28 @@ fi
 ########################################################
 # Setup
 ########################################################
+# setup fzf key bindings and fuzzy complete
+eval "$(fzf --zsh)"
 
+export FZF_DEFAULT_COMMAND='fd --hidden --strip-cwd-prefix --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="fd --type d --hidden --strip-cwd-prefix --exclude .git"
+export FZF_DEFAULT_OPTS="--color bg:-1,bg+:-1,fg:-1,fg+:#feffff,hl:#993f84,hl+:#d256b5,info:#676767,prompt:#676767,pointer:#676767"
+
+# Use fd (https://github.com/sharkdp/fd) for listing path candidates.
+# - The first argument to the function ($1) is the base path to start traversal
+# - See the source code (completion.{bash,zsh}) for the details.
+_fzf_compgen_path() {
+  fd --hidden --exclude .git . "$1"
+}
+
+# Use fd to generate the list for directory completion
+_fzf_compgen_dir() {
+  fd --type=d --hidden --exclude .git . "$1"
+}
 
 if [ -f $HOME/.fzf.zsh ]; then
   source $HOME/.fzf.zsh
-  export FZF_DEFAULT_COMMAND='fd --type f'
-  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-  export FZF_DEFAULT_OPTS="--color bg:-1,bg+:-1,fg:-1,fg+:#feffff,hl:#993f84,hl+:#d256b5,info:#676767,prompt:#676767,pointer:#676767"
 fi
 
 # add color to man pages
@@ -173,13 +188,7 @@ done
 # If a ~/.localrc zshrc exists, source it
 [[ -a ~/.localrc ]] && source ~/.localrc
 
-# gcp
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/rochana/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/rochana/Downloads/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/rochana/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/rochana/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
-export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+# gcpexport USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
 # java
 export SDKMAN_DIR=$(brew --prefix sdkman-cli)/libexec
@@ -199,3 +208,11 @@ export PATH="$PATH:~/Library/Python/3.10/bin"
 if [[ -d $DOTFILES/zsh/functions ]]; then
     for func in $DOTFILES/zsh/functions/*(:t); autoload -U $func
 fi
+
+export GPG_TTY=$(tty)
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/rochana/Downloads/google-cloud-sdk 2/path.zsh.inc' ]; then . '/Users/rochana/Downloads/google-cloud-sdk 2/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/rochana/Downloads/google-cloud-sdk 2/completion.zsh.inc' ]; then . '/Users/rochana/Downloads/google-cloud-sdk 2/completion.zsh.inc'; fi

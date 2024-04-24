@@ -52,6 +52,7 @@ return {
 						"--column",
 						"--smart-case",
 						"--trim",
+						"--hidden",
 					},
 					prompt_prefix = "   ",
 					selection_caret = "  ",
