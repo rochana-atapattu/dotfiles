@@ -114,3 +114,5 @@ brew "d2" # diagrams
 brew "sqlc" # generate type safe Go code from SQL
 
 brew "pinentry-mac" # GPG
+
+brew "wireshark" # network protocol analyzer

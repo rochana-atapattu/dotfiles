@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Check if a file path is provided
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 path_to_your_pem_file.pem"
+    exit 1
+fi
+
+# Read the PEM file path from the first command line argument
+pem_file="$1"
+
+# Read the PEM file, remove new lines, and output it as a single line
+single_line_pem=$(awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' "$pem_file")
+
+# Print the single line PEM
+echo $single_line_pem
