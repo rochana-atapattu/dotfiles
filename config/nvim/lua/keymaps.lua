@@ -17,7 +17,7 @@ vim.g.maplocalleader = " "
 nmap("<Space>", "<Nop>", { silent = true })
 vmap("<Space>", "<Nop>", { silent = true })
 
-vim.opt.pastetoggle = "<leader>v"
+-- vim.opt.pastetoggle = "<leader>v"
 
 nnoremap("Q", "<nop>")
 inoremap("jk", "<Esc>")

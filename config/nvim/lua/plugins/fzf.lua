@@ -1,8 +1,19 @@
+local os_name = vim.loop.os_uname().sysname
+local fzf_dir
+
+if os_name == "Darwin" then
+  fzf_dir = vim.env.HOMEBREW_PREFIX .. "/opt/fzf"
+elseif os_name == "Linux" then
+  fzf_dir = "/usr/bin/fzf"
+else
+  print("Unsupported " .. os_name)
+end
+
 return {
   {
 
     "junegunn/fzf.vim",
-    dependencies = { { dir = vim.env.HOMEBREW_PREFIX .. "/opt/fzf" } },
+    dependencies = { { dir =  fzf_dir} },
     config = function()
       local utils = require("utils")
       local imap = utils.imap

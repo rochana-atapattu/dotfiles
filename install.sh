@@ -125,16 +125,16 @@ setup_git() {
 setup_homebrew() {
     title "Setting up Homebrew"
 
+    if [ "$(uname)" == "Linux" ]; then
+	echo "$(uname)" 
+	sudo pacman --needed -S - < pacman.txt
+	exit 0
+    fi
+
     if test ! "$(command -v brew)"; then
         info "Homebrew not installed. Installing."
         # Run as a login shell (non-interactive) so that the script doesn't pause for user input
         curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | bash --login
-    fi
-
-    if [ "$(uname)" == "Linux" ]; then
-        test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
-        test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-        test -r ~/.bash_profile && echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.bash_profile
     fi
 
     # install brew dependencies from Brewfile
@@ -155,12 +155,26 @@ fetch_catppuccin_theme() {
 setup_shell() {
     title "Configuring shell"
 
-    [[ -n "$(command -v brew)" ]] && zsh_path="$(brew --prefix)/bin/zsh" || zsh_path="$(which zsh)"
-    if ! grep "$zsh_path" /etc/shells; then
+    # Determine the OS to use the right package manager and paths
+    if [[ "$(uname)" == "Darwin" ]]; then
+        # macOS specific code
+        [[ -n "$(command -v brew)" ]] && zsh_path="$(brew --prefix)/bin/zsh" || zsh_path="$(which zsh)"
+    elif [[ -n "$(command -v pacman)" ]]; then
+        # Arch Linux specific code
+        sudo pacman -Syu --needed zsh
+        zsh_path="/usr/bin/zsh"
+    else
+        echo "Unsupported OS"
+        return 1
+    fi
+
+    # Add zsh to /etc/shells if it's not already there
+    if ! grep -q "$zsh_path" /etc/shells; then
         info "adding $zsh_path to /etc/shells"
         echo "$zsh_path" | sudo tee -a /etc/shells
     fi
 
+    # Change the default shell to zsh if it's not already set
     if [[ "$SHELL" != "$zsh_path" ]]; then
         chsh -s "$zsh_path"
         info "default shell changed to $zsh_path"

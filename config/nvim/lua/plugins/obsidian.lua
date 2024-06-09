@@ -11,8 +11,8 @@ return {
 			workspaces = {
 				{
 					name = "Notes",
-					-- path = "~/second-brain",
-					path = "/Users/rochana/Library/Mobile Documents/iCloud~md~obsidian/Documents/Notes",
+					path = "~/second-brain",
+					-- path = "/Users/rochana/Library/Mobile Documents/iCloud~md~obsidian/Documents/Notes",
 					overrides = {
 						notes_subdir = "zettelkasten",
 						template = nil,
