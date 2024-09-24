@@ -5,6 +5,8 @@
 export DOTFILES="$(dirname "$(dirname "$(readlink "${(%):-%N}")")")"
 export CACHEDIR="$HOME/.local/share"
 export VIM_TMP="$HOME/.vim-tmp"
+# Nix!
+export NIX_CONF_DIR=$HOME/.config/nix
 # add a config file for ripgrep
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/config"
 
@@ -30,3 +32,4 @@ export CLOUDSDK_PYTHON_SITEPACKAGES=1
 # else
 #     export TERM=tmux-256color
 # fi
+. "$HOME/.cargo/env"
