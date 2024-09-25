@@ -38,9 +38,9 @@
           {
             _module.args = { inherit inputs; };
             home-manager = {
-              users.etravers = import ./home-manager/home.nix;
+              users.rochana = import ./home-manager/home.nix;
             };
-            users.users.etravers.home = "/Users/rochana";
+            users.users.rochana.home = "/Users/rochana";
           }
         ];
       };
