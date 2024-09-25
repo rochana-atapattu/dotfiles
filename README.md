@@ -15,13 +15,13 @@ On OSX: [Determinate Systems Installer](https://github.com/DeterminateSystems/ni
 
 ### Darwin/Linux
 
-`nix run nix-darwin -- switch --flake github:evantravers/dotfiles`
+`nix run nix-darwin -- switch --flake github:rochana/dotfiles`
 
 ## Update
 
 ### Darwin
 
-`darwin-rebuild switch --flake ~/src/github.com/evantravers/dotfiles`
+`darwin-rebuild switch --flake /dotfiles`
 
 ## Home Manager
 

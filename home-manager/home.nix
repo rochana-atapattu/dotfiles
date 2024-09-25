@@ -3,8 +3,6 @@
 {
 
   home = {
-    username = "rochana";
-    homeDirectory = "/Users/rochana";
     stateVersion = "24.05"; # Please read the comment before changing.
 
     # The home.packages option allows you to install Nix packages into your
