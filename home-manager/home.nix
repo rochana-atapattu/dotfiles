@@ -8,12 +8,17 @@
     # The home.packages option allows you to install Nix packages into your
     # environment.
     packages = [
+      pkgs.veracrypt
       pkgs.amber
       pkgs.devenv
       pkgs.markdown-oxide
       pkgs.nixd
       pkgs.ripgrep
       pkgs.hello
+      pkgs.jq
+      pkgs.python312
+      pkgs.python312Packages.mysqlclient
+      pkgs.python312Packages.pip
     ];
 
     # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -38,13 +43,6 @@
     
     zsh = {
       enable = true;
-      initExtra = ''
-        # Add any additional configurations here
-        export PATH=/run/current-system/sw/bin:$HOME/.nix-profile/bin:$PATH
-        if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
-          . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
-        fi
-      '';
     };
   };
 

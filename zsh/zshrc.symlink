@@ -216,4 +216,9 @@ if [ -f '/Users/rochana/Downloads/google-cloud-sdk 2/path.zsh.inc' ]; then . '/U
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/rochana/Downloads/google-cloud-sdk 2/completion.zsh.inc' ]; then . '/Users/rochana/Downloads/google-cloud-sdk 2/completion.zsh.inc'; fi
-
+        
+# Add any additional configurations here
+export PATH=/run/current-system/sw/bin:$HOME/.nix-profile/bin:$PATH
+if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+    . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+fi

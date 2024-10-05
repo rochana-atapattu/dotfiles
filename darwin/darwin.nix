@@ -57,13 +57,13 @@
       };
       NSGlobalDomain = {
         AppleKeyboardUIMode = 3;
-        "com.apple.keyboard.fnState" = true;
+        "com.apple.keyboard.fnState" = false;
         NSAutomaticWindowAnimationsEnabled = false;
       };
     };
     keyboard = {
       enableKeyMapping = true;
-      remapCapsLockToControl = true;
+      remapCapsLockToControl = false;
     };
   };
 }
