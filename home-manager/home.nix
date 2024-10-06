@@ -2,13 +2,18 @@
 
 {
 
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+      allowUnfreePredicate = (_: true);
+    };
+  };
   home = {
     stateVersion = "24.05"; # Please read the comment before changing.
 
     # The home.packages option allows you to install Nix packages into your
     # environment.
     packages = [
-      pkgs.veracrypt
       pkgs.amber
       pkgs.devenv
       pkgs.markdown-oxide
